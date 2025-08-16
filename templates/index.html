@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ branding.title }}</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <img class="logo" src="/static/images/logo.png" alt="Logo Wisuda"/>
+      <h1 class="title">{{ branding.title }}</h1>
+      <p class="subtitle">{{ branding.subtitle }}</p>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash">
+            {% for category, message in messages %}
+              <div class="flash-item {{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% if user_email %}
+        <div class="session">
+          <span>Login sebagai: <strong>{{ user_email }}</strong></span>
+          <a class="btn secondary" href="/logout">Logout</a>
+        </div>
+
+        <form class="form" action="/upload" method="POST" enctype="multipart/form-data">
+          <label>Nama Simpan di Drive
+            <input type="text" name="custom_name" placeholder="Contoh: Foto_Wisuda_2025" required/>
+          </label>
+
+          <label>Jenis Dokumen
+            <select name="jenis" required>
+              <option value="">Pilih jenis</option>
+              <option>Foto</option>
+              <option>Ijazah</option>
+              <option>Transkrip</option>
+              <option>Lainnya</option>
+            </select>
+          </label>
+
+          <label>Pilih File
+            <input type="file" name="file" required/>
+          </label>
+
+          <button class="btn primary" type="submit">📤 Upload ke Google Drive</button>
+          <p class="hint">Nama file di Drive akan mengikuti input <code>Nama Simpan di Drive</code></p>
+        </form>
+      {% else %}
+        <a class="btn primary" href="/login">Login dengan Google</a>
+        <p class="hint">Hanya email yang sudah diizinkan yang dapat mengunggah.</p>
+      {% endif %}
+    </div>
+
+    <footer>
+      <small>&copy; {{ branding.footer }}</small>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "folder_id": "1nqylc41QXlAfQIURFRsmnLYhzAORl8aZ",
+  "redirect_uri": "http://localhost:5000/oauth2callback",
+  "branding": {
+    "title": "Pengumpulan File Wisuda 2025",
+    "subtitle": "Semua berkas otomatis tersimpan di Google Drive",
+    "footer": "Wisuda MHMQ 2025"
+  },
+  "theme": {
+    "primary": "#d4af37"
+  }
+}
